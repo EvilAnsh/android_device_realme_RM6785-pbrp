@@ -1,5 +1,7 @@
+import /tee.rc
+
 on init
-    mkdir /mnt/vendor/persist
+    #mkdir /mnt/vendor/persist
     mount ext4 /dev/block/by-name/persist /mnt/vendor/persist rw
     setprop persist.sys.firstlaunch false
     
