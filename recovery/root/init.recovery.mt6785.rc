@@ -22,7 +22,7 @@ service keystore /system/bin/keystore /tmp/misc/keystore
     user root
     group root drmrpc readproc
     disabled
-    seclabel u:r:recovery:s0
+    seclabel u:r:recovery:s
 
 service mobicore /vendor/bin/mcDriverDaemon_wrapper
     user root
@@ -30,14 +30,13 @@ service mobicore /vendor/bin/mcDriverDaemon_wrapper
     disabled
     seclabel u:r:recovery:s0
 
-#Add for OPPO FBE
-service hal_cryptoeng_oppo /system/bin/hw/vendor.oplus.hardware.cryptoeng@1.0-service
+service cryptoeng_oplus /system/bin/hw/vendor.oplus.hardware.cryptoeng@1.0-service
     user root
     group root drmrpc
     disabled
     seclabel u:r:recovery:s0
 
-service keymaster-4-0 /system/bin/android.hardware.keymaster@4.0-service.trustonic
+service keymaster-4-1 /system/bin/hw/android.hardware.keymaster@4.1-service.trustonic
     user root
     group root drmrpc
     disabled
@@ -59,41 +58,41 @@ on boot
     start init-device-sh
 
 on property:hwservicemanager.ready=true
-    start hal_cryptoeng_oppo
+    start cryptoeng_oplus
     start mobicore
-    start keymaster-4-0
+    start keymaster-4-1
     start gatekeeper-1-0
 
 on property:ro.crypto.state=unsupported
-    stop hal_cryptoeng_oppo
+    stop cryptoeng_oplus
     stop mobicore
     stop servicemanager
     stop hwservicemanager
-    stop keymaster-4-0
+    stop keymaster-4-1
     stop gatekeeper-1-0
 
 on property:ro.crypto.state=unencrypted
-    stop hal_cryptoeng_oppo
+    stop cryptoeng_oplus
     stop mobicore
     stop servicemanager
     stop hwservicemanager
-    stop keymaster-4-0
+    stop keymaster-4-1
     stop gatekeeper-1-0
 
 on property:twrp.decrypt.done=true
-    stop hal_cryptoeng_oppo
+    stop cryptoeng_oplus
     stop mobicore
     stop servicemanager
     stop hwservicemanager
-    stop keymaster-4-0
+    stop keymaster-4-1
     stop gatekeeper-1-0
 #    
 on property:enable.fbe.service=0
-    stop hal_cryptoeng_oppo
+    stop cryptoeng_oplus
     stop mobicore
     stop servicemanager
     stop hwservicemanager
-    stop keymaster-4-0
+    stop keymaster-4-1
     stop gatekeeperd
     stop vendor.gatekeeper-1-0    
 
