@@ -48,7 +48,7 @@ jobs:
 
        - name: RM6785 Setup
          run: |
-           if [[ ${GITHUB_ACTION_REPOSITORY} == "PitchBlackRecoveryProject/android_device_realme_RMX2001-pbrp" ]]; then echo "RMX2001_BUILD=true" >>$GITHUB_ENV;fi
+           if [[ ${GITHUB_ACTION_REPOSITORY} == "EvilAnsh/android_device_realme_RM6785-pbrp" ]]; then echo "RMX2001_BUILD=false" >>$GITHUB_ENV;fi
 
        - name: Checkout Cleaning Up Runner Repo
          uses: actions/checkout@v2
